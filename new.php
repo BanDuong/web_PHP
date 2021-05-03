@@ -18,7 +18,7 @@
     </div>
     <!---------------------------------------------------------------------------------------->
     <div class="edit_content">
-        <form method="post" action=""  enctype="multipart/form-data">
+        <form method="post" action="insertData.php" enctype="multipart/form-data">
             <div>
                 <label for="title">Title<?php for($i=0;$i<40;$i++) echo "&#160;"; ?></label>
                 <input type="text" placeholder="title" name="title" autofocus required><br><br>
@@ -50,46 +50,3 @@
     </div>
 </body>
 </html>
-<!--------------------------------------server-------------------------------------------------------------->
-<?php
-    function InsertData($title,$description,$img,$status){
-        $servername = "127.0.0.1";
-        $username = "root";
-        $password = "admin";
-        $DBname = "mydb";
-
-        // Create connection
-        $conn = new mysqli($servername, $username, $password, $DBname);
-        // Check connection
-        if ($conn->connect_error) {
-            die("Connection failed: " . $conn->connect_error);
-        }
-
-        $sql = "INSERT INTO manage (title,description,image,status,create_at)
-        VALUES ('$title','$description','$img','$status',NOW())";
-        echo $sql;
-        if ($conn->query($sql) === TRUE) {
-            echo "<script>alert('New record created successfully');</script>";
-        } else {
-            echo "<script>alert('Error');</script> ";
-        }
-        $conn->close();
-    }
-
-    function Selection(){
-
-    }
-    if($_SERVER['REQUEST_METHOD'] == 'POST'){
-        $title = $_POST['title'];
-        $description = $_POST['description'];
-        $img = './images/'.$_FILES['image']['name'];
-        move_uploaded_file($_FILES['image']['tmp_name'], $img);
-        $status = $_POST['status'] == "enabled" ? 1 : 0;
-        echo $title."<br>";
-        echo $description."<br>";
-        echo $img."<br>";
-        echo $status."<br>";
-        echo "<img src='$img'>";
-        InsertData($title,$description,$img,$status);
-    }
-?>

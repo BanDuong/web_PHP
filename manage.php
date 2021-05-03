@@ -11,7 +11,6 @@
         #id_content{
             width: 100%;
             background-color: red;
-            
             overflow-y: auto;
         }
         button:hover{
@@ -29,7 +28,7 @@
     <div>
         <table width=100% class="tb_header" >
             <td style="border: none"><h1>MANAGE</h1></td>
-            <td style="text-align:end;border: none"><a href="init.php"><button style="cursor:pointer rgba(91, 83, 211, 0.867)">New</button></a></td>
+            <td style="text-align:end;border: none"><a href="new.php"><button style="cursor:pointer rgba(91, 83, 211, 0.867)">New</button></a></td>
         </table>
         <hr>
     </div>
