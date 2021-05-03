@@ -10,8 +10,7 @@
         }
         #id_content{
             width: 100%;
-            background-color: red;
-            overflow-y: auto;
+            overflow: auto;
         }
         button:hover{
             background-color: rgb(236, 119, 231);
@@ -42,13 +41,40 @@
                 <th>Status</th>
                 <th>Action</th>
             </tr>
-            <tr>
-                <td>ssssssssss</td>
-                <td>a44444aaaaaaaaaaaaaaaaaaaaaaa</td>
-                <td>ssssssssssssssssssssssssssssssssssssss</td>
-                <td>ssssssssssssssssssssssssss</td>
-                <td>sssssssssssssssssssssssssssssssssssssssssssssssss</td>
-            </tr>
+            <?php   
+                $servername = "127.0.0.1";
+                $username = "root";
+                $password = "admin";
+                $DBname = "mydb";
+
+                // Create connection
+                $conn = new mysqli($servername, $username, $password, $DBname);
+                // Check connection
+                if ($conn->connect_error) {
+                    die("Connection failed: " . $conn->connect_error);
+                }
+
+                $sql = "SELECT (id,image,title,status) FROM manage";
+                $result = $conn->query($sql);
+
+               // if ($result->num_rows > 0) {
+                // output data of each row
+                    while($row = $result->fetch_assoc()) {
+                        $status = $row['status'] == 1 ? 'Enabled' : 'Disabled';
+                        $id = $row['id'];
+                        $img = $row['image'];
+                        $tt = $row['title'];
+                        echo "<tr>";
+                        echo "<td>$id</td>";
+                        echo "<td><img src='$img'></td>";
+                        echo "<td>$tt</td>";
+                        echo "<td>$stauts</td>";
+                        echo "<td><a href=''>Show</a>|<a href='edit.php'>Edit</a>|<a href=''>Delete</a></td>";
+                        echo "</tr>";
+                    }
+                //}
+                $conn->close();
+            ?>
         </table>
     </div>
 <!------------------------------------------footer------------------------------------------------------------------>
