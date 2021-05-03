@@ -8,24 +8,46 @@
 </head>
 <body>
     
-    <form action="test.php" method="post" enctype="multipart/form-data">
-        <label>here!</label><br>
-        <select name="values">
-            <option >value_1</option>
-            <option >value_2</option>
-            <option >value_3</option>
-        </select>
-        <input type="submit">
-	</form>
-    <?php
-        $val = 1;
-        if ($_SERVER['REQUEST_METHOD'] == 'POST'){
-            $var = $_POST['values'];
-            echo "value was choosed be: ".$var."<br>";
-            $val = $val == 1 ? 100 : 0;
-            echo $val;
-        }
-    ?>
-    
 </body>
 </html>
+<?php
+    $title= $_GET['title'];
+    function InsertData($title,$description,$img,$status){
+        $servername = "127.0.0.1";
+        $username = "root";
+        $password = "admin";
+        $DBname = "mydb";
+
+        // Create connection
+        $conn = new mysqli($servername, $username, $password, $DBname);
+        // Check connection
+        if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
+        }
+
+        $sql = "INSERT INTO manage (title,description,image,status,created_at)
+        VALUES ($title,$description,$img,$status,NOW())";
+        echo $sql;
+        if ($conn->query($sql) === TRUE) {
+            echo "<script>alert('New record created successfully');</script>";
+        } else {
+            echo "<script>alert('Error');</script> ";
+        }
+        $conn->close();
+    }
+
+    function Selection(){
+
+    }$
+    if($_SERVER['REQUEST_METHOD'] == 'POST'){
+        $title = $_POST['title'];
+        $description = $_POST['description'];
+        $img = './images/'.$_FILES['image']['name'];
+        move_uploaded_file($_FILES['image']['tmp_name'], $img);
+        $status = $_POST['status'] == "enabled" ? 1 : 0;
+        echo $title."<br>";
+        echo $description."<br>";
+        echo $img."<br>";
+        echo $status."<br>";
+        echo "<img src='$img'>";
+    }
