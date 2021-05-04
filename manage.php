@@ -64,7 +64,7 @@
                                 echo "<td><img src='".$row['image']."' width='200' height='150'></td>";
                                 echo "<td>" . $row['title'] . "</td>";
                                 echo "<td>" . $status . "</td>";
-                                echo "<td><a href=''>Show</a> | <a href='edit.php?edit_id=".$row['id']."'>Edit</a> | <a href='delete.php?del_id=".$row['id']."'>Delete</a></td>";
+                                echo "<td><a href='show.php?show_id=".$row['id']."'>Show</a> | <a href='edit.php?edit_id=".$row['id']."'>Edit</a> | <a href='delete.php?del_id=".$row['id']."'>Delete</a></td>";
                             echo "</tr>";
                         }
                         // Free result set
