@@ -33,7 +33,7 @@
     </div>
 <!--------------------------------------------content---------------------------------------------------------------->
     <div id="id_content">
-        <table width = 100% class="tb_content" style="border-collapse:collapse;overflow-x:auto">
+        <table width = 100% class="tb_content" style="border-collapse:collapse;overflow-x:auto;text-align:center">
             <tr>
                 <th>ID</th>
                 <th>Thumb</th>
@@ -48,32 +48,35 @@
                 $DBname = "mydb";
 
                 // Create connection
-                $conn = new mysqli($servername, $username, $password, $DBname);
+                $mysqli = new mysqli($servername, $username, $password, $DBname);
                 // Check connection
-                if ($conn->connect_error) {
-                    die("Connection failed: " . $conn->connect_error);
+                if ($mysqli === false) {
+                    die("Connection failed: ".$mysqli->connect_error);
                 }
-
-                $sql = "SELECT (id,image,title,status) FROM manage";
-                $result = $conn->query($sql);
-
-               // if ($result->num_rows > 0) {
-                // output data of each row
-                    while($row = $result->fetch_assoc()) {
-                        $status = $row['status'] == 1 ? 'Enabled' : 'Disabled';
-                        $id = $row['id'];
-                        $img = $row['image'];
-                        $tt = $row['title'];
-                        echo "<tr>";
-                        echo "<td>$id</td>";
-                        echo "<td><img src='$img'></td>";
-                        echo "<td>$tt</td>";
-                        echo "<td>$stauts</td>";
-                        echo "<td><a href=''>Show</a>|<a href='edit.php'>Edit</a>|<a href=''>Delete</a></td>";
-                        echo "</tr>";
+                
+                $sql = "SELECT id,image,title,status FROM manage";
+                if($result = $mysqli->query($sql)){
+                    if($result->num_rows > 0){
+                        while($row = $result->fetch_array()){
+                            $status = $row['status'] == 0 ? 'Disabled':'Enabled';
+                            echo "<tr>";
+                                echo "<td>" . $row['id'] . "</td>";
+                                echo "<td><img src='".$row['image']."' width='200' height='150'></td>";
+                                echo "<td>" . $row['title'] . "</td>";
+                                echo "<td>" . $status . "</td>";
+                                echo "<td><a href=''>Show</a> | <a href='edit.php?edit_id=".$row['id']."'>Edit</a> | <a href='delete.php?del_id=".$row['id']."'>Delete</a></td>";
+                            echo "</tr>";
+                        }
+                        // Free result set
+                        $result->free();
+                    } else{
+                        echo "No records matching your query were found.";
                     }
-                //}
-                $conn->close();
+                } else{
+                    echo "ERROR: Could not able to execute $sql. ".$mysqli->error;
+                }
+                // Close connection
+                $mysqli->close();
             ?>
         </table>
     </div>

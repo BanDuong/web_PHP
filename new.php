@@ -26,7 +26,7 @@
             <!------------------------------------------------------------------------------>
             <div>
                 <label for="description">Description<?php for($i=0;$i<28;$i++) echo "&#160;"; ?></label>
-                <textarea name="description" rows="5px" cols="40px" placeholder="description" required style="font-size:15px" ></textarea>
+                <textarea name="description" rows="5px" cols="40px" placeholder="description" style="font-size:15px" ></textarea>
             </div>
             <!------------------------------------------------------------------------------>
             <div>
