@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="refresh" content="1,url=manage.php">
+    <meta http-equiv="refresh" content="0,url=manage.php">
     <title></title>
 </head>
 <body>
@@ -14,7 +14,10 @@
 <?php
         $title = $_POST['title'];
         $description = $_POST['description'];
-        $img = './images/'.$_FILES['image']['name'];
+        $img = './images/'.mt_rand().$_FILES['image']['name'];
+        while(file_exists($img)){
+            $img = './images/'.mt_rand().$_FILES['image']['name'];
+        }
         move_uploaded_file($_FILES['image']['tmp_name'], $img);
         $status = $_POST['status'] == "enabled" ? 1 : 0;
 

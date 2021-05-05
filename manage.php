@@ -56,10 +56,12 @@
                 $sql = "SELECT id,image,title,status FROM manage";
                 if($result = $mysqli->query($sql)){
                     if($result->num_rows > 0){
+                        $id = 0;
                         while($row = $result->fetch_array()){
                             $status = $row['status'] == 0 ? 'Disabled':'Enabled';
+                            $id++;
                             echo "<tr>";
-                                echo "<td width='30px'>" . $row['id'] . "</td>";
+                                echo "<td width='30px'>" . $id . "</td>";
                                 echo "<td width='150px'><img src='".$row['image']."' width='200' height='150'></td>";
                                 echo "<td width='350px'>" . $row['title'] . "</td>";
                                 echo "<td>" . $status . "</td>";
@@ -78,11 +80,11 @@
                 $mysqli->close();
             ?>
         </table>
-    </div>
+    </div><br>
 <!------------------------------------------footer------------------------------------------------------------------>
 
     <div>
-        <table width=80% class="tb_footer">
+        <table width=100% class="tb_footer">
             <tr >
                 <th style="text-align:left;border: none">
                     <form>

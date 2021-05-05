@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="refresh" content="0,url=manage.php">
     <title>Update</title>
 </head>
 <body>
@@ -30,14 +31,14 @@
         $mysqli->query($sql);
 
         if ($_FILES['image']['name']!=""){
-            $sql = "UPDATE manage SET image='./images/".$_FILES['image']['name']."' WHERE id=".$_GET['update_id'];
+            $sql = "UPDATE manage SET image='./images/".mt_rand().$_FILES['image']['name']."' WHERE id=".$_GET['update_id'];
             unlink($image);
             move_uploaded_file($_FILES['image']['tmp_name'],'./images/'.$_FILES['image']['name']);
         }
         if ($mysqli->query($sql) === TRUE) {
-            echo "Record updated successfully";
+            echo "<script>alert('Record updated successfullyy');</script>";
         } else {
-            echo "Error updating record: ".$conn->error;
+            echo "<script>alert('Error');</script> ";
         }
 
         $mysqli->close();

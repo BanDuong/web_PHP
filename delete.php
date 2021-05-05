@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="refresh" content="1,url=manage.php">
+    <meta http-equiv="refresh" content="0,url=manage.php">
     <title>Delete</title>
 </head>
 <body>
@@ -19,19 +19,25 @@
     $DBname = "mydb";
 
     // Create connection
-    $conn = new mysqli($servername, $username, $password, $DBname);
+    $mysqli = new mysqli($servername, $username, $password, $DBname);
     // Check connection
-    if ($conn === false) {
-        die("Connection failed: ".$conn->connect_error);
+    if ($mysqli === false) {
+        die("Connection failed: ".$mysqli->connect_error);
     }
+    $sql = "SELECT image FROM manage WHERE id=".$_GET['del_id'];
+    $result = $mysqli->query($sql);
+    $row = $result->fetch_array();
+    $image = $row['image'];
+    unlink($image);
+
     $sql = "DELETE FROM manage WHERE id=".$_GET['del_id'];
-    $conn->query($sql);
+    $mysqli->query($sql);
     $sql = "ALTER TABLE manage AUTO_INCREMENT=1";
 
-    if ($conn->query($sql) === TRUE) {
+    if ($mysqli->query($sql) === TRUE) {
             echo "<script>alert('Deleted successfully');</script>";
         } else {
             echo "<script>alert('Error');</script> ";
         }
-    $conn->close();
+    $mysqli->close();
 ?>
