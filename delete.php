@@ -26,7 +26,7 @@
     }
     $sql = "DELETE FROM manage WHERE id=".$_GET['del_id'];
     $conn->query($sql);
-    $sql = "ALTER TABLE manage AUTO_INCREMENT = ".$_GET['del_id'];
+    $sql = "ALTER TABLE manage AUTO_INCREMENT=1";
 
     if ($conn->query($sql) === TRUE) {
             echo "<script>alert('Deleted successfully');</script>";

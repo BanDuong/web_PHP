@@ -6,7 +6,6 @@
         th,td{
             border: 1px solid black;
             word-wrap: break-word;
-            width:350px;
         }
         #id_content{
             width: 100%;
@@ -60,9 +59,9 @@
                         while($row = $result->fetch_array()){
                             $status = $row['status'] == 0 ? 'Disabled':'Enabled';
                             echo "<tr>";
-                                echo "<td>" . $row['id'] . "</td>";
-                                echo "<td><img src='".$row['image']."' width='200' height='150'></td>";
-                                echo "<td>" . $row['title'] . "</td>";
+                                echo "<td width='30px'>" . $row['id'] . "</td>";
+                                echo "<td width='150px'><img src='".$row['image']."' width='200' height='150'></td>";
+                                echo "<td width='350px'>" . $row['title'] . "</td>";
                                 echo "<td>" . $status . "</td>";
                                 echo "<td><a href='show.php?show_id=".$row['id']."'>Show</a> | <a href='edit.php?edit_id=".$row['id']."'>Edit</a> | <a href='delete.php?del_id=".$row['id']."'>Delete</a></td>";
                             echo "</tr>";
