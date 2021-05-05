@@ -54,7 +54,7 @@
                             $id++;
                             echo "<tr>";
                                 echo "<td width='30px'>" . $id . "</td>";
-                                echo "<td width='250px'><a href='show.php?show_id=".$row['id']."'><img src='".$row['image']."' width='200' height='150'></a></td>";
+                                echo "<td width='250px'><a href='show_front.php?show_id=".$row['id']."'><img src='".$row['image']."' width='200' height='150'></a></td>";
                                 echo "<td>" . $row['title'] . "</td>";  
                             echo "</tr>";
                         }
